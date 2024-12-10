@@ -1,0 +1,76 @@
+https://console.redhat.com/openshift/create/local
+
+Download what you need to get started
+OpenShift Local
+Download and extract the OpenShift Local archive on your computer and open the installer. Opening the installer will automatically start a step-by-step installation guide.
+
+
+Windows
+
+x86_64
+Pull secret
+Download or copy your pull secret. You'll be prompted for this information during installation.
+==================================================================================================
+PS C:\Program Files\Red Hat OpenShift Local> .\crc.exe setup
+
+INFO Downloading bundle: C:\Users\MegaStore\.crc\cache\crc_hyperv_4.17.3_amd64.crcbundle...
+5.09 GiB / 5.09 GiB [------------------------------------------------------------------------------] 100.00% 3.09 MiB/s
+INFO Uncompressing C:\Users\MegaStore\.crc\cache\crc_hyperv_4.17.3_amd64.crcbundle
+crc.vhdx:  20.63 GiB / 20.63 GiB [----------------------------------------------------------------------------] 100.00%
+oc.exe:  128.74 MiB / 128.74 MiB [----------------------------------------------------------------------------] 100.00%
+
+PS C:\Program Files\Red Hat OpenShift Local> crc start
+-----------------------------------------------------------------------------
+Started the OpenShift cluster.
+
+The server is accessible via web console at:
+  https://console-openshift-console.apps-crc.testing
+
+Log in as administrator:
+  Username: kubeadmin
+  Password: 2bwbR-vY8vj-IXhVE-uNrjh
+
+Log in as user:
+  Username: developer
+  Password: developer
+
+Use the 'oc' command line interface:
+  PS> & crc oc-env | Invoke-Expression
+  PS> oc login -u developer https://api.crc.testing:6443
+--------------------------------------------------------------------------------------
+PS C:\Program Files\Red Hat OpenShift Local> & crc oc-env | Invoke-Expression
+PS C:\Program Files\Red Hat OpenShift Local> oc login -u developer https://api.crc.testing:6443
+Logged into "https://api.crc.testing:6443" as "developer" using existing credentials.
+
+You don't have any projects. You can try to create a new project, by running
+
+    oc new-project <projectname>
+
+PS C:\Program Files\Red Hat OpenShift Local> oc new-project amer-project
+Now using project "amer-project" on server "https://api.crc.testing:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.43 -- /agnhost serve-hostname
+
+PS C:\Program Files\Red Hat OpenShift Local> oc new-app rails-postgresql-example
+--> Deploying template "amer-project/rails-postgresql-example" to project amer-project
+------------------------------------------------------------------------------------
+PS C:\Program Files\Red Hat OpenShift Local> kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.43 -- /agnhost console-openshift-console.apps-crc.testing
+deployment.apps/hello-node created
+PS C:\Program Files\Red Hat OpenShift Local> ping console-openshift-console.apps-crc.testing
+
+Pinging api.crc.testing [127.0.0.1] with 32 bytes of data:
+Reply from 127.0.0.1: bytes=32 time<1ms TTL=128
+Reply from 127.0.0.1: bytes=32 time<1ms TTL=128
+Reply from 127.0.0.1: bytes=32 time<1ms TTL=128
+
+
+
+=========================================================================================
+
+
