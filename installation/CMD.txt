@@ -1,0 +1,133 @@
+1. Login to OpenShift
+---------------------
+Start by logging into your OpenShift cluster.
+
+# Log in to OpenShift
+oc login https://<your-openshift-api-server>:<port> --token=<your-token>
+
+# Verify your current user and context
+oc whoami
+oc project
+
+2. Basic Namespace and Project Management
+-----------------------------------------
+# List all projects
+oc get projects
+
+# Create a new project
+oc new-project my-project
+
+# Switch to a different project
+oc project <project-name>
+
+# Delete a project
+oc delete project <project-name>
+
+3. Working with Pods
+--------------------
+# List all pods in the current namespace
+oc get pods
+
+# Get detailed information about a specific pod
+oc describe pod <pod-name>
+
+# View logs of a pod
+oc logs <pod-name>
+
+# Execute a command inside a running pod
+oc exec -it <pod-name> -- /bin/bash
+
+4. Deployments
+--------------
+# Create a new app from an image or source code
+oc new-app <image-or-source-url> --name=<app-name>
+
+# Get all deployments
+oc get deployments
+
+# Scale a deployment
+oc scale --replicas=<number> deployment/<deployment-name>
+
+# Rollback to a previous deployment
+oc rollout undo deployment/<deployment-name>
+
+5. Services and Routes
+----------------------
+# List all services
+oc get svc
+
+# Expose a deployment as a service
+oc expose deployment/<deployment-name> --port=<port> --target-port=<target-port>
+
+# Create a route to the service
+oc expose svc/<service-name>
+
+# Get routes
+oc get routes
+
+6. Storage Management
+---------------------
+# List persistent volume claims (PVCs)
+oc get pvc
+
+# Create a PVC (via YAML or CLI)
+oc create -f pvc.yaml
+
+# Bind a PVC to a pod (in the pod spec)
+oc set volume pod/<pod-name> --add --name=<volume-name> --claim-name=<pvc-name> --mount-path=<mount-path>
+
+7. Configurations and Secrets
+-----------------------------
+# List ConfigMaps
+oc get configmaps
+
+# Create a ConfigMap
+oc create configmap <configmap-name> --from-literal=<key>=<value>
+
+# List secrets
+oc get secrets
+
+# Create a secret
+oc create secret generic <secret-name> --from-literal=<key>=<value>
+
+8. Working with YAML
+--------------------
+# Export resource YAML
+oc get <resource-type> <resource-name> -o yaml > resource.yaml
+
+# Apply changes from a YAML file
+oc apply -f resource.yaml
+
+# Delete a resource from a YAML file
+oc delete -f resource.yaml
+
+9. Monitoring and Debugging
+---------------------------
+# Watch resource changes
+oc get pods --watch
+
+# Debug a pod
+oc debug pod/<pod-name>
+
+# Check cluster events
+oc get events
+
+10. OpenShift-Specific Resources
+--------------------------------
+# List Builds and Image Streams
+oc get builds
+oc get imagestreams
+
+# Trigger a new build
+oc start-build <build-config-name>
+
+# View build logs
+oc logs build/<build-name>
+
+11. Cleanup
+-----------
+# Delete a pod
+oc delete pod <pod-name>
+
+# Delete all resources of a specific type
+oc delete all --all
